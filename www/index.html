@@ -10,11 +10,20 @@
         <style>
             body { margin:0; padding:0; }
             #map { position:absolute; top:0; bottom:0; width:100%; }
+            .marker {
+              background-image: url('img/arrow.png');
+              background-size: cover;
+              width: 45px;
+              height: 45px;
+              border-radius: 50%;
+              cursor: pointer;
+            }
         </style>
         <title>Map</title>
     </head>
     <body>
-        <div id="compass" style="position: fixed; top: 0; left: 0; z-index: 10000;"></div>
+        <div id="compass" style="position: fixed; top: 40px; left: 50px; z-index: 10000;"></div>
+        <div id="acc" style="position: fixed; top: 60px; left: 50px; z-index: 10000;"></div>
         <div id='map'></div>
         <script>
             mapboxgl.accessToken = 'pk.eyJ1IjoiYmlueWF0b3YiLCJhIjoiY2l5NG9mMTN0MDAyNTJ3bG41Y2lsZ2ZiYiJ9.whhi4GndmK5p4DZ2MRevAg';
@@ -24,9 +33,16 @@
                 center: [49.85, 40.38],
                 pitch: 60, // pitch in degrees
                 bearing: 0, // bearing in degrees
-                zoom: 18
+                zoom: 16,
+                interactive: false
             });
+            var el = document.createElement('div');
+              el.className = 'marker';
 
+              // make a marker for each feature and add to the map
+              var marker  = new mapboxgl.Marker(el, { offset: [-50 / 2, -50 / 2] })
+              .setLngLat([49.85, 40.38])
+              .addTo(map);
         </script>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
