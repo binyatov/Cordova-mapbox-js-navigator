@@ -13,13 +13,12 @@
             .marker {
               background-image: url('img/arrow.png');
               background-size: cover;
-              width: 45px;
-              height: 45px;
-              border-radius: 50%;
+              width: 40px;
+              height: 40px;
               cursor: pointer;
             }
         </style>
-        <title>Map</title>
+        <title>Map test</title>
     </head>
     <body>
         <div id="compass" style="position: fixed; top: 40px; left: 50px; z-index: 10000;"></div>
@@ -33,14 +32,14 @@
                 center: [49.85, 40.38],
                 pitch: 60, // pitch in degrees
                 bearing: 0, // bearing in degrees
-                zoom: 16,
+                zoom: 17,
                 interactive: false
             });
             var el = document.createElement('div');
               el.className = 'marker';
 
               // make a marker for each feature and add to the map
-              var marker  = new mapboxgl.Marker(el, { offset: [-50 / 2, -50 / 2] })
+              var marker  = new mapboxgl.Marker(el, { offset: [0, -40/2] })
               .setLngLat([49.85, 40.38])
               .addTo(map);
         </script>
