@@ -1,5 +1,6 @@
 var url = "https://api.mapbox.com/directions/v5/mapbox/driving/";
 var ACCESS_TOKEN = 'pk.eyJ1IjoiYmlueWF0b3YiLCJhIjoiY2l5NG9mMTN0MDAyNTJ3bG41Y2lsZ2ZiYiJ9.whhi4GndmK5p4DZ2MRevAg';
+var appInterval;
 var app = {
     options: {
         filter: 6
@@ -20,11 +21,18 @@ var app = {
             this.onCompassError, 
             this.options
         );
-        var geolocation = navigator.geolocation.watchPosition(
-            this.onLocationSuccess, 
-            this.onLocationError, 
-            {maximumAge: 0, timeout: 2000, enableHighAccurracy: true}
-        );
+        appInterval = setInterval(function(){
+            navigator.geolocation.getCurrentPosition(
+                app.onLocationSuccess, 
+                app.onLocationError, 
+                {maximumAge: 1000, timeout: 2000, enableHighAccurracy: true}
+            );
+        }, 3000);
+        // var geolocation = navigator.geolocation.watchPosition(
+        //     this.onLocationSuccess, 
+        //     this.onLocationError, 
+        //     {maximumAge: 1000, timeout: 2000, enableHighAccurracy: true}
+        // );
     },
     onCompassSuccess: function(heading){
         document.getElementById('compass').innerHTML = heading.magneticHeading;
